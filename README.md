@@ -7,7 +7,7 @@ Coel注：分割线下的内容是作者添加在README.MD中的内容，由我�
 
 免责声明！ <br><br>
 
-这种“加密”和“解密”工具是基于游戏中的解密工具的，它不是存储重要文件的安全方法。
+这种“加密”和“解密”工具是基于游戏中的解密工具的，它不是存储重要文件的安全方法。<br>
 它是为好玩而制作的，只能用于娱乐，而不是合法的加密。<br>
 它将被保存在一个类似于BASH的状态，意思是没有GUI或任何东西。 <br><br>
 
@@ -97,5 +97,5 @@ Email: admin@kleberstoff.xyz<br>
 
 ![pic5](https://raw.githubusercontent.com/hacknet-bar/DECryptSuite/master/5.png)
 
-之后就不需要这么麻烦了，直接双击工具即可加密。别忘了把input.zip放在files里面。
+之后就不需要这么麻烦了，直接双击工具即可加密。别忘了把input.zip放在files里面。<br><br>
 -h可以查看帮助，在这里就不翻译了。
