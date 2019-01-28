@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
 using System.Linq;
@@ -21,9 +21,11 @@ namespace DECrypt_Suite
         private static bool file = false;
         private static bool folder = false;
         private static bool header = false;
+        private static bool Hex = false;
         private static bool headeronly = false;
         private static bool decrypting = false;
 
+        //private static string ip = "";
         private static string password = "";
         private static string filePath = "";
         private static string folderPath = "";
@@ -154,6 +156,8 @@ namespace DECrypt_Suite
                         Console.WriteLine("-p/--password: Sets a password for encrypting/decrypting the files.");
                         Console.WriteLine("-ex/--extension: Sets the file extenstion. Example: -ex .txt");
                         Console.WriteLine("-he/--header: Sets the file header.");
+                        Console.WriteLine("-Hex: Read the file by Hex");
+                        Console.WriteLine("-s/--sign: Sets the file sign");
                         Console.WriteLine("-o/--output: Sets the output directory.");
                         Console.WriteLine("--contact: Shows my contact information.");
                         Console.WriteLine("--headeronly: Only decrypts the header of a file.");
@@ -172,6 +176,8 @@ namespace DECrypt_Suite
                         Console.WriteLine("-p/--password: Sets a password for encrypting/decrypting the files.");
                         Console.WriteLine("-ex/--extension: Sets the file extenstion. Example: -ex .txt");
                         Console.WriteLine("-he/--header: Sets the file header.");
+                        Console.WriteLine("-Hex: Read the file by Hex");
+                        Console.WriteLine("-s/--sign: Sets the file sign");
                         Console.WriteLine("-o/--output: Sets the output directory.");
                         Console.WriteLine("--contact: Shows my contact information.");
                         Console.WriteLine("--headeronly: Only decrypts the header of a file.");
@@ -226,6 +232,12 @@ namespace DECrypt_Suite
                     case "-p":
                         password = args[i + 1];
                         break;
+                    case "-s":
+                        signing = args[i + 1];
+                        break;
+                    case "--sign":
+                        signing = args[i + 1];
+                        break;
                     case "--password":
                         password = args[i + 1];
                         break;
@@ -253,6 +265,9 @@ namespace DECrypt_Suite
                     case "-he":
                         header = true;
                         headerData = args[i + 1];
+                        break;
+                    case "-Hex":
+                        Hex = true;
                         break;
                     case "--header":
                         header = true;
@@ -349,7 +364,15 @@ namespace DECrypt_Suite
                             {
                                 if (headerData != "" && headerData != null)
                                 {
-                                    string Encryption = BitConverter.ToString(GetBinaryFile(filePath));
+                                    string Encryption = "";
+                                    if (Hex)
+                                    {
+                                        Encryption = BitConverter.ToString(GetBinaryFile(filePath));
+                                    }
+                                    else
+                                    {
+                                        Encryption = File.ReadAllText(filePath);
+                                    }
                                     Encryption = EncryptString(Encryption, signing, headerData, password, extenstion);
                                     File.WriteAllText(output + ".dec", Encryption);
                                     Console.WriteLine($"Encryption of {filePath} complete.");
@@ -381,7 +404,15 @@ namespace DECrypt_Suite
                             {
                                 if (headerData != "" && headerData != null)
                                 {
-                                    string Encryption = BitConverter.ToString(GetBinaryFile(filePath));
+                                    string Encryption = "";
+                                    if (Hex)
+                                    {
+                                        Encryption = BitConverter.ToString(GetBinaryFile(filePath));
+                                    }
+                                    else
+                                    {
+                                        Encryption = File.ReadAllText(filePath);
+                                    }
                                     Encryption = EncryptString(Encryption, signing, headerData, password, extenstion);
                                     File.WriteAllText("files/output.dec", Encryption);
                                     Console.WriteLine($"Encryption of {folderPath} complete.");
@@ -507,7 +538,7 @@ namespace DECrypt_Suite
         //=============\\
         //↓↓ Encrypt ↓↓\\
 
-        public static string EncryptString(string data, string Sign, string header = null,  string pass = "", string fileExtension = null)
+        public static string EncryptString(string data, string Sign, string header = null, string pass = "", string fileExtension = null)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("REMEMBER: THIS IS NOT A REAL, SAFE ENCRYPTION!");
