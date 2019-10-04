@@ -27,7 +27,7 @@ Yes.<br><br>
 Yes.<br><br>
 
 <strong>我应该使用它来存储重要文件吗【比如A片的链接，滑稽】？</strong><br>
-Ye……等等，千万不要。<br><br>
+Ye……等等，千万不要。（因为这玩意完全不安全）<br><br>
 
 <strong>我该怎么用呢？</strong><br>
 它是CLI（命令行接口【即为Command Line Interface】）——它通过Windows CMD工作，在与程序集相同的文件夹中打开CMD，<br>
